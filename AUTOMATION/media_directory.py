@@ -17,7 +17,7 @@ def find_dir():
 
         print(f"Success! File saved to your Windows folder:")
         print(file_path)
-        return file_path
+        return save_dir
 
     except FileNotFoundError:
         print("Error: Could not run 'cmd.exe'. Are you running this script inside WSL?")
@@ -38,7 +38,7 @@ def list_file(save_dir):
 
 if __name__ == "__main__":
     
-    saved_file_path = find_dir
+    saved_file_path = find_dir()
 
     if saved_file_path:
         directory_to_list = saved_file_path.parent
