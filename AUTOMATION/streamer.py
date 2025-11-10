@@ -1,10 +1,19 @@
 import time, requests, pyperclip
 import os
 from dotenv import load_dotenv
-from media_directory import find_dir
+from media_directory import find_media_dirs
 
 load_dotenv() 
-film_directory = find_dir()
+
+# Directories
+MOVIE_SAVE_PATH, TV_SAVE_PATH = find_media_dirs()
+
+TV_KEYWORDS = [
+    "Season", "season", "S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08",
+    "s01", "s02", "s03", "s04", "s05", "s06", "s07", "s08",
+    "E01", "E02", "E03", "e01", "e02", "e03", "Complete Series"
+]
+
 
 QBIT_URL = os.getenv("QBIT_URL")
 AUTH = {
@@ -18,6 +27,8 @@ if not QBIT_URL or not AUTH["username"] or not AUTH["password"]:
 	print("Please check your .env file in this directory.")
 else:
 	print(f"Connecting to {QBIT_URL} as {AUTH['username']}...")
+	print(f"Movies will be saved to: {MOVIE_SAVE_PATH}")
+	print(f"TV Shows will be saved to: {TV_SAVE_PATH}")
 	try:
 		s = requests.Session()
 		login_response = s.post(f"{QBIT_URL}/api/v2/auth/login", data=AUTH)
@@ -33,7 +44,7 @@ else:
 					if clip.endswith("=Torrentio"):
 						clip = clip.replace("=Torrentio", "")
 					print(f"Adding: {clip[:60]}")
-					s.post(f"{QBIT_URL}/api/v2/torrents/add", data={"urls": clip, "savepath":film_directory})
+					# s.post(f"{QBIT_URL}/api/v2/torrents/add", data={"urls": clip,})
 					clip_prev = clip
 				time.sleep(1)
 
