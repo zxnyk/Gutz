@@ -4,9 +4,6 @@ __pycache__/
 *.pyo
 *.pyd
 
-# Virtual Environment
-/AUTOMATION/
-
 # Secrets
 .env
 */.env
