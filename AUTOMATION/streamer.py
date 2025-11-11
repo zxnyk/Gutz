@@ -44,7 +44,9 @@ else:
 					if clip.endswith("=Torrentio"):
 						clip = clip.replace("=Torrentio", "")
 					print(f"Adding: {clip[:60]}")
-					# s.post(f"{QBIT_URL}/api/v2/torrents/add", data={"urls": clip,})
+					x =  s.get(f"{QBIT_URL}/api/v2/torrents/info?", data={"urls": clip})
+					print(x.json())
+					# x = s.post(f"{QBIT_URL}/api/v2/torrents/add", data={"urls": clip})
 					clip_prev = clip
 				time.sleep(1)
 
