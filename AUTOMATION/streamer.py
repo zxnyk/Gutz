@@ -1,12 +1,9 @@
 import time, requests, pyperclip
 import os
 from dotenv import load_dotenv
-from media_directory import find_media_dirs
+
 
 load_dotenv() 
-
-# Directories
-# MOVIE_SAVE_PATH, TV_SAVE_PATH = find_media_dirs()
 
 ITS_A_PRANK = r"C:\Users\Andrei Mayor\Documents\Films"
 
