@@ -41,13 +41,12 @@ else:
 			while True:
 				clip = pyperclip.paste()
 				if clip != clip_prev and clip.startswith("magnet:"):
-					if clip.endswith("=Torrentio"):
-						clip = clip.replace("=Torrentio", "")
+					if clip.replace("dn=Torrentio", ):
+						clip = clip.split("&dn=")[0]
 					print(f"Adding: {clip[:60]}")
-					x =  s.get(f"{QBIT_URL}/api/v2/torrents/info?", data={"urls": clip})
-					print(x.json())
-					# x = s.post(f"{QBIT_URL}/api/v2/torrents/add", data={"urls": clip})
+					s.post(f"{QBIT_URL}/api/v2/torrents/add", data={"urls": clip, "save_path": MOVIE_SAVE_PATH})
 					clip_prev = clip
+
 				time.sleep(1)
 
 	except requests.exceptions.ConnectionError:
